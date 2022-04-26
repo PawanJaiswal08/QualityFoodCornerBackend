@@ -3,7 +3,6 @@ const { ObjectId } = require('mongodb');
 const Category = require('../models/category');
 const { validationResult } = require('express-validator');
 const { redisClient } = require('./../assets/redis')
-multi = redisClient.multi();
 
 // @desc Get a Category By Name
 // @route GET /api/category/:catergory
@@ -207,20 +206,17 @@ exports.getAllCategory = async (req, res) => {
     const data = await redisClient.get('allcategories')
 
     if (data != null) {
-        return res.json(JSON.parse(data))
+        return res.json({categories: JSON.parse(data)})
     } else {
         try {
             const categories = await Category.find();
             if (categories) {
                 await redisClient.set('allcategories', JSON.stringify(categories))
-                res.status(200).json(categories)
+                return res.status(200).json({categories: categories})
             }
         } catch (error) {
             console.log(error);
             return error
         }
-        
     }
-
-    
 }

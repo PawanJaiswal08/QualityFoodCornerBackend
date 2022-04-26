@@ -84,7 +84,7 @@ exports.getAllProducts = async (req, res) => {
 	const data = await redisClient.get(`allproducts?${req.query.limit}`)
     
     if (data != null) {
-        return res.json(JSON.parse(data))
+        return res.json({products: JSON.parse(data)})
     }else {
 		try {
 			let limit = req.query.limit ? parseInt(req.query.limit) : 100;
@@ -97,7 +97,7 @@ exports.getAllProducts = async (req, res) => {
 											.limit(limit);
 	
 			if (products) {
-                await redisClient.set(`allproducts?${req.query.limit}`, JSON.stringify(products))
+                // await redisClient.set(`allproducts?${req.query.limit}`, JSON.stringify(products))
 				return res.json({ products: products });
 			}
 		} catch (error) {
@@ -277,7 +277,8 @@ exports.createProduct = async (req, res) => {
 		const productCreated = await product.save();
 
 		if (productCreated) {
-			redisClient.set('allproducts', JSON.stringify(productCreated))
+			const products = await Product.find()
+			redisClient.set('allproducts', JSON.stringify(products))
 			res.json(productCreated);
 		}
 		});
@@ -336,9 +337,9 @@ exports.deleteProduct = async (req, res) => {
 		const deletedProduct = await product.remove();
 
 		if (deletedProduct) {
-			return res.status(204).json({
-				message: `Successfully Deleted ${deletedProduct.name} Product`,
-			});
+			const products = await Product.find()
+			redisClient.set('allproducts', JSON.stringify(products))
+			return res.status(204).json({ message: `Successfully Deleted ${deletedProduct.name} Product` });
 		}
 
     } catch (error) {
