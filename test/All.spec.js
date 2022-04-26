@@ -14,17 +14,17 @@ const token =
 
 describe('Products', function () {
     // checking that get request for getting all food items is working properly
-    it('get products', function (done) {
-        this.timeout(0);
-        chai
-            .request(server)
-            .get('/api/products')
-            .end((err, res) => {
-                res.should.have.status(200);
-                // console.log(res.body);
-                done();
-            });
-    });
+    // it('get products', function (done) {
+    //     this.timeout(0);
+    //     chai
+    //         .request(server)
+    //         .get('/api/products')
+    //         .end((err, res) => {
+    //             res.should.have.status(200);
+    //             // console.log(res.body);
+    //             done();
+    //         });
+    // });
 
     it('get products by id', function (done) {
         this.timeout(0);
@@ -62,18 +62,18 @@ describe('Products', function () {
 
 describe('Offers', function () {
     // checking that get request for getting all food items is working properly
-    it('get all offers', function (done) {
-        this.timeout(0);
-        chai
-            .request(server)
-            .get('/api/offers')
-            .set('Authorization', 'Bearer ' + token)
-            .end((err, res) => {
-                res.should.have.status(200);
-                // console.log(res.body);
-                done();
-            });
-    });
+    // it('get all offers', function (done) {
+    //     this.timeout(0);
+    //     chai
+    //         .request(server)
+    //         .get('/api/offers')
+    //         .set('Authorization', 'Bearer ' + token)
+    //         .end((err, res) => {
+    //             res.should.have.status(200);
+    //             // console.log(res.body);
+    //             done();
+    //         });
+    // });
 
     it('Delete offer', function (done) {
         this.timeout(0);
@@ -91,17 +91,17 @@ describe('Offers', function () {
 
 describe('Categories', function () {
     // checking that get request for getting all food items is working properly
-    it('get categories', function (done) {
-        this.timeout(0);
-        chai
-            .request(server)
-            .get('/api/categories')
-            .end((err, res) => {
-                res.should.have.status(200);
-                // console.log(res.body.data);
-                done();
-            });
-    });
+    // it('get categories', function (done) {
+    //     this.timeout(0);
+    //     chai
+    //         .request(server)
+    //         .get('/api/categories')
+    //         .end((err, res) => {
+    //             res.should.have.status(200);
+    //             // console.log(res.body.data);
+    //             done();
+    //         });
+    // });
 
     it('get category by id', function (done) {
         this.timeout(0);
