@@ -115,3 +115,5 @@ describe('Categories', function () {
             });
     });
 });
+
+exit(0)
