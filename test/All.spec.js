@@ -116,4 +116,4 @@ describe('Categories', function () {
     });
 });
 
-exit(0)
+// exit(0)
