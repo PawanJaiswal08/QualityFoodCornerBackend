@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
 /qfc-logs
-# config.env
+config.env
 package-lock.json
+Dockerfile
